@@ -11,8 +11,8 @@ export async function GET() {
       <?xml version="1.0" encoding="UTF-8" ?>
       <rss version="2.0">
         <channel>
-          <title>My Site RSS Feed</title>
-          <link>https://your-domain.com</link>
+          <title>Aibookmarker RSS Feed</title>
+          <link>https://nav.aibookmarker.com</link>
           <description>Latest published sites</description>
           <language>en</language>
           <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
