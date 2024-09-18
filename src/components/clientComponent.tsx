@@ -19,7 +19,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
     sites.forEach((site) => {
       if (Array.isArray(site.tags)) {
         site.tags.forEach((tag: any) => {
-          const tagName = tag.name;
+          const tagName = tag.name.toLowerCase();
           if (!categories[tagName]) {
             categories[tagName] = [];
           }
