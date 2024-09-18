@@ -1,0 +1,31 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Site {
+  id        Int      @id @default(autoincrement())
+  url       String
+  title     String
+  favicon   String
+  summarize String
+  createdAt DateTime @default(now())
+  published Boolean  @default(false)  // New field to indicate visibility
+  tags      Tag[]    @relation("SiteTags")
+}
+
+model Tag {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  sites Site[]  @relation("SiteTags")
+}
+
+
