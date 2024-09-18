@@ -1,5 +1,4 @@
 // src/app/rss.xml/route.ts
-import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { format } from 'date-fns';
 import { getPublishedSites } from '@/lib/db';
