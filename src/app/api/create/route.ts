@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const { title, url, favicon, summarize, tags } = body;
 
     // Validate request body
-    if (!title || !url || !favicon || !summarize || !Array.isArray(tags)) {
+    if (!title || !url || !summarize || !Array.isArray(tags)) {
       return NextResponse.json({ message: 'Invalid request data' }, { status: 400 });
     }
 
