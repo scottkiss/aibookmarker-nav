@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
 
     // Create or connect tags
     const tagOperations = tags.map((tag: string) => ({
-      where: { name: tag },
-      create: { name: tag },
+      where: { name: tag.toLowerCase() },
+      create: { name: tag.toLowerCase() },
     }));
 
     const newSite = await prisma.site.create({
