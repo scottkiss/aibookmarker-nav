@@ -20,7 +20,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
 
   return (
     <div className="flex flex-1">
-      <aside className="lg:w-64 p-4 bg-white shadow-lg">
+      <aside className="lg:w-64 p-4 bg-white shadow-lg fixed h-full overflow-y-auto">
         <h2 className="font-bold mb-4">网站分类</h2>
         <nav aria-label="Category navigation">
           <ul className="space-y-2">
@@ -38,7 +38,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
         </nav>
       </aside>
 
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 ml-64">
         {Object.keys(categories).map((tag) => (
           <section key={tag} id={tag} className="mb-8">
             <h1 className="text-3xl font-bold mb-4">{tag.charAt(0).toUpperCase() + tag.slice(1)} 网站</h1>
