@@ -6,7 +6,6 @@ import { MenuIcon, XIcon } from 'lucide-react';
 import Head from 'next/head';
 
 export default function ClientComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
-
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState<boolean>(true);
   const [sites, setSites] = useState<SiteProps["site"][]>(initialSites);
@@ -58,33 +57,53 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
   return (
     <>
       <Head>
-        <title>Featured Website Navigation - Tags Categories</title>
-        <meta name="description" content="Browse featured website categories and discover content and resources that interest you." />
-        <meta name="keywords" content="website navigation, tag categories, website recommendations, browse categories" />
+        <title>Featured Website Navigation - Browse Categories by Tags</title>
+        <meta name="description" content="Discover and explore a curated selection of websites organized by categories. Find valuable content and resources tailored to your interests." />
+        <meta name="keywords" content="website navigation, tag categories, content discovery, resource browsing, curated websites" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Featured Website Navigation - Tags Categories" />
-        <meta property="og:description" content="Browse featured website categories and discover content and resources that interest you." />
+        <link rel="canonical" href="https://nav.aibookmarker.com/" />
+        <meta property="og:title" content="Featured Website Navigation - Browse Categories by Tags" />
+        <meta property="og:description" content="Discover and explore a curated selection of websites organized by categories. Find valuable content and resources tailored to your interests." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aibookmarker-nav.vercel.app/" />
-        <meta property="og:image" content="https://aibookmarker-nav.vercel.app/preview-image.jpg" />
+        <meta property="og:url" content="https://nav.aibookmarker.com/" />
+        <meta property="og:image" content="https://nav.aibookmarker.com/preview-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Featured Website Navigation - Browse Categories by Tags" />
+        <meta name="twitter:description" content="Discover and explore a curated selection of websites organized by categories. Find valuable content and resources tailored to your interests." />
+        <meta name="twitter:image" content="https://nav.aibookmarker.com/preview-image.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Featured Website Navigation",
+              "description": "Discover and explore a curated selection of websites organized by categories.",
+              "url": "https://nav.aibookmarker.com/"
+            }
+          `}
+        </script>
       </Head>
 
       <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-        <div className="lg:hidden flex justify-between items-center mb-4">
+        <header className="lg:hidden flex justify-between items-center p-4 bg-white shadow-md">
+          <h1 className="text-2xl font-bold">Featured Websites</h1>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 bg-blue-600 text-white rounded-md focus:outline-none z-20"
+            className="p-2 bg-blue-600 text-white rounded-md focus:outline-none"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             {menuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
           </button>
-        </div>
+        </header>
 
-        <aside
+        <nav
           className={`${
             menuOpen ? "block" : "hidden"
-          } lg:block bg-white shadow-lg p-4 rounded-md transition-all duration-300 ease-in-out lg:w-48 lg:pr-2 lg:static absolute top-0 left-0 w-full lg:w-64 z-10`}
+          } lg:block bg-white shadow-lg p-4 rounded-md transition-all duration-300 ease-in-out lg:w-64 lg:static absolute top-0 left-0 w-full z-10`}
+          aria-label="Category navigation"
         >
+          <h2 className="text-xl font-semibold mb-4">Categories</h2>
           <ul className="space-y-2">
             {Object.keys(categories).map((tag) => (
               <li key={tag}>
@@ -99,17 +118,19 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
                       ? "font-bold text-blue-600 bg-blue-100"
                       : "text-gray-700 hover:bg-gray-200"
                   }`}
+                  aria-current={activeTag === tag ? "true" : "false"}
                 >
                   {tag}
                 </button>
               </li>
             ))}
           </ul>
-        </aside>
+        </nav>
 
-        <main className="flex-1 m-8">
+        <main className="flex-1 m-8" id="main-content">
+          <h2 className="text-3xl font-bold mb-6">{activeTag ? `${activeTag.charAt(0).toUpperCase() + activeTag.slice(1)} Websites` : 'Featured Websites'}</h2>
           {activeTag ? (
-            <div>
+            <section aria-label={`${activeTag} websites`}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {getCurrentPageData().map((site, index) => (
                   <SiteCard key={index} site={site} />
@@ -117,11 +138,12 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
               </div>
 
               {totalPages > 1 && (
-                <div className="mt-6 flex justify-center space-x-2">
+                <nav className="mt-6 flex justify-center space-x-2" aria-label="Pagination">
                   <button
                     onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
                     className="px-4 py-2 bg-blue-600 text-white rounded-md disabled:opacity-50"
+                    aria-label="Previous page"
                   >
                     Previous
                   </button>
@@ -135,6 +157,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
                           ? "bg-blue-600 text-white"
                           : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                       }`}
+                      aria-current={currentPage === number ? "page" : undefined}
                     >
                       {number}
                     </button>
@@ -144,14 +167,15 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
                     onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                     disabled={currentPage === totalPages}
                     className="px-4 py-2 bg-blue-600 text-white rounded-md disabled:opacity-50"
+                    aria-label="Next page"
                   >
                     Next
                   </button>
-                </div>
+                </nav>
               )}
-            </div>
+            </section>
           ) : (
-            <p className="text-lg text-gray-600">No sites available for this category.</p>
+            <p className="text-lg text-gray-600">Please select a category to view websites.</p>
           )}
         </main>
       </div>
