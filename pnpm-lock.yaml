@@ -4,6 +4,9 @@ dependencies:
   '@prisma/client':
     specifier: ^5.19.1
     version: registry.npmjs.org/@prisma/client@5.19.1(prisma@5.19.1)
+  '@radix-ui/react-accordion':
+    specifier: ^1.2.0
+    version: registry.npmjs.org/@radix-ui/react-accordion@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-avatar':
     specifier: ^1.1.0
     version: registry.npmjs.org/@radix-ui/react-avatar@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
@@ -844,6 +847,37 @@ packages:
     version: 1.1.0
     dev: false
 
+  registry.npmjs.org/@radix-ui/react-accordion@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-HJOzSX8dQqtsp/3jVxCU3CXEONF7/2jlGAB28oX8TTw1Dz8JYbEI1UcL8355PuLBE41/IRRMvCw7VkiK/jcUOQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@radix-ui/react-accordion/-/react-accordion-1.2.0.tgz}
+    id: registry.npmjs.org/@radix-ui/react-accordion/1.2.0
+    name: '@radix-ui/react-accordion'
+    version: 1.2.0
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@radix-ui/primitive': registry.npmjs.org/@radix-ui/primitive@1.1.0
+      '@radix-ui/react-collapsible': registry.npmjs.org/@radix-ui/react-collapsible@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-collection': registry.npmjs.org/@radix-ui/react-collection@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-compose-refs': registry.npmjs.org/@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-direction': registry.npmjs.org/@radix-ui/react-direction@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-id': registry.npmjs.org/@radix-ui/react-id@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-use-controllable-state': registry.npmjs.org/@radix-ui/react-use-controllable-state@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@types/react': registry.npmjs.org/@types/react@18.3.5
+      '@types/react-dom': registry.npmjs.org/@types/react-dom@18.3.0
+      react: registry.npmjs.org/react@18.3.1
+      react-dom: registry.npmjs.org/react-dom@18.3.1(react@18.3.1)
+    dev: false
+
   registry.npmjs.org/@radix-ui/react-arrow@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-FmlW1rCg7hBpEBwFbjHwCW6AmWLQM6g/v0Sn8XbP9NvmSZ2San1FpQeyPtufzOMSIx7Y4dzjlHoifhp+7NkZhw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@radix-ui/react-arrow/-/react-arrow-1.1.0.tgz}
     id: registry.npmjs.org/@radix-ui/react-arrow/1.1.0
@@ -886,6 +920,36 @@ packages:
       '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context@1.1.0(@types/react@18.3.5)(react@18.3.1)
       '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-use-callback-ref': registry.npmjs.org/@radix-ui/react-use-callback-ref@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@types/react': registry.npmjs.org/@types/react@18.3.5
+      '@types/react-dom': registry.npmjs.org/@types/react-dom@18.3.0
+      react: registry.npmjs.org/react@18.3.1
+      react-dom: registry.npmjs.org/react-dom@18.3.1(react@18.3.1)
+    dev: false
+
+  registry.npmjs.org/@radix-ui/react-collapsible@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-zQY7Epa8sTL0mq4ajSJpjgn2YmCgyrG7RsQgLp3C0LQVkG7+Tf6Pv1CeNWZLyqMjhdPkBa5Lx7wYBeSu7uCSTA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@radix-ui/react-collapsible/-/react-collapsible-1.1.0.tgz}
+    id: registry.npmjs.org/@radix-ui/react-collapsible/1.1.0
+    name: '@radix-ui/react-collapsible'
+    version: 1.1.0
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@radix-ui/primitive': registry.npmjs.org/@radix-ui/primitive@1.1.0
+      '@radix-ui/react-compose-refs': registry.npmjs.org/@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-context': registry.npmjs.org/@radix-ui/react-context@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-id': registry.npmjs.org/@radix-ui/react-id@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@radix-ui/react-presence': registry.npmjs.org/@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-use-controllable-state': registry.npmjs.org/@radix-ui/react-use-controllable-state@1.1.0(@types/react@18.3.5)(react@18.3.1)
       '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.5)(react@18.3.1)
       '@types/react': registry.npmjs.org/@types/react@18.3.5
       '@types/react-dom': registry.npmjs.org/@types/react-dom@18.3.0
@@ -1112,6 +1176,30 @@ packages:
         optional: true
     dependencies:
       '@radix-ui/react-primitive': registry.npmjs.org/@radix-ui/react-primitive@2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.5)(react@18.3.1)
+      '@types/react': registry.npmjs.org/@types/react@18.3.5
+      '@types/react-dom': registry.npmjs.org/@types/react-dom@18.3.0
+      react: registry.npmjs.org/react@18.3.1
+      react-dom: registry.npmjs.org/react-dom@18.3.1(react@18.3.1)
+    dev: false
+
+  registry.npmjs.org/@radix-ui/react-presence@1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-Gq6wuRN/asf9H/E/VzdKoUtT8GC9PQc9z40/vEr0VCJ4u5XvvhWIrSsCB6vD2/cH7ugTdSfYq9fLJCcM00acrQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.0.tgz}
+    id: registry.npmjs.org/@radix-ui/react-presence/1.1.0
+    name: '@radix-ui/react-presence'
+    version: 1.1.0
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@radix-ui/react-compose-refs': registry.npmjs.org/@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.5)(react@18.3.1)
       '@radix-ui/react-use-layout-effect': registry.npmjs.org/@radix-ui/react-use-layout-effect@1.1.0(@types/react@18.3.5)(react@18.3.1)
       '@types/react': registry.npmjs.org/@types/react@18.3.5
       '@types/react-dom': registry.npmjs.org/@types/react-dom@18.3.0

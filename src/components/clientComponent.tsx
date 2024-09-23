@@ -1,5 +1,8 @@
 import { SiteProps } from "./SiteCard";
-import { Button, Card, Typography } from "shadcn-ui";
+import * as Accordion from "@radix-ui/react-accordion";
+import { Button } from "./ui/button";
+import Typography from "./Typography";
+
 
 export default function ClientComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
   const categorizeByTags = (sites: SiteProps["site"][]) => {
@@ -23,19 +26,34 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
       <aside className="lg:w-64 p-4 bg-gray-100 shadow-lg fixed h-full overflow-y-auto">
         <Typography variant="h2" className="font-bold mb-4">网站分类</Typography>
         <nav aria-label="Category navigation">
-          <ul className="space-y-2">
+          <Accordion.Root type="single" collapsible>
             {Object.keys(categories).map((tag) => (
-              <li key={tag}>
-                <Button
-                  variant="link"
-                  href={`#${tag}`}
-                  className="text-lg block p-2 text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                </Button>
-              </li>
+              <Accordion.Item key={tag} value={tag}>
+                <Accordion.Header>
+                  <Accordion.Trigger asChild>
+                    <Button className="text-lg block w-full text-gray-700 hover:bg-gray-200 transition-colors">
+                      {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                    </Button>
+                  </Accordion.Trigger>
+                </Accordion.Header>
+                <Accordion.Content>
+                  <ul className="space-y-2 p-4">
+                    {categories[tag].map((site) => (
+                      <li key={site.id}>
+                        <div className="bg-white p-4 shadow rounded">
+                          <Typography variant="h3" className="font-semibold">{site.title}</Typography>
+                          <Typography>{site.summarize}</Typography>
+                          <Button asChild>
+                            <a href={site.url} className="text-blue-500">{site.url}</a>
+                          </Button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </Accordion.Content>
+              </Accordion.Item>
             ))}
-          </ul>
+          </Accordion.Root>
         </nav>
       </aside>
 
@@ -47,17 +65,13 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
             </Typography>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories[tag].map((site) => (
-                <Card key={site.id} className="bg-white shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105">
+                <div key={site.id} className="bg-white shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105">
                   <Typography variant="h2" className="font-semibold">{site.title}</Typography>
                   <Typography className="mt-2">{site.summarize}</Typography>
-                  <Button
-                    variant="link"
-                    href={site.url}
-                    className="text-blue-500 mt-2"
-                  >
-                    {site.url}
+                  <Button asChild>
+                    <a href={site.url} className="text-blue-500 mt-2">{site.url}</a>
                   </Button>
-                </Card>
+                </div>
               ))}
             </div>
           </section>
