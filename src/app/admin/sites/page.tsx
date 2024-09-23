@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { SessionProvider, signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Table } from "@/components/ui/table";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
@@ -110,6 +110,7 @@ export default function AdminSites() {
   };
 
   return (
+    <SessionProvider>
     <div className="p-4 sm:p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-xl sm:text-2xl font-bold">Site Management</h1>
@@ -212,5 +213,6 @@ export default function AdminSites() {
         </div>
       </div>
     </div>
+    </SessionProvider>
   );
 }

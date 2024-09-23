@@ -1,4 +1,5 @@
 "use client";
+import { SessionProvider } from "next-auth/react";
 
 import { useState, useEffect } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
@@ -54,7 +55,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <>
+    <SessionProvider>
       <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
         <nav className="lg:hidden flex justify-between items-center mb-4" aria-label="Mobile navigation">
           <button
@@ -153,6 +154,6 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
           )}
         </main>
       </div>
-    </>
+    </SessionProvider>
   );
 }
