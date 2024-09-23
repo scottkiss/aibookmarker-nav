@@ -1,4 +1,3 @@
-"use client";
 
 import SiteCard, { SiteProps } from '../components/SiteCard';
 import { useState, useEffect } from 'react';
