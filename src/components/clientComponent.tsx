@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
 import { MenuIcon, XIcon } from 'lucide-react';
 import SiteCard, { SiteProps } from '../components/SiteCard';
 
@@ -56,19 +55,6 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
 
   return (
     <>
-      <Head>
-        <title>{`Browse ${activeTag ? activeTag.charAt(0).toUpperCase() + activeTag.slice(1) : 'Featured'} Websites - AIBookmarker`}</title>
-        <meta name="description" content={`Discover and explore ${activeTag || 'featured'} websites. Find valuable resources and content in our curated collection.`} />
-        <meta name="keywords" content={`${activeTag || 'featured'} websites, website navigation, content discovery, AIBookmarker`} />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content={`Browse ${activeTag ? activeTag.charAt(0).toUpperCase() + activeTag.slice(1) : 'Featured'} Websites - AIBookmarker`} />
-        <meta property="og:description" content={`Discover and explore ${activeTag || 'featured'} websites. Find valuable resources and content in our curated collection.`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://nav.aibookmarker.com/${activeTag || ''}`} />
-        <meta property="og:image" content="https://nav.aibookmarker.com/preview-image.jpg" />
-        <link rel="canonical" href={`https://nav.aibookmarker.com/${activeTag || ''}`} />
-      </Head>
-
       <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
         <nav className="lg:hidden flex justify-between items-center mb-4" aria-label="Mobile navigation">
           <button
