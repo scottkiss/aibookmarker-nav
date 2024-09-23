@@ -3,10 +3,26 @@
 import SiteCard, { SiteProps } from '../components/SiteCard';
 import { useState, useEffect } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
+
+
+
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-export default function ClientComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
+// SSR - Fetch the sites data on the server side
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/sites`);
+  const initialSites = await response.json();
 
+  return {
+    props: {
+      initialSites,
+    },
+  };
+};
+
+// SEO-optimized ClientComponent
+export default function ClientComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState<boolean>(true);
   const [sites, setSites] = useState<SiteProps["site"][]>(initialSites);
@@ -32,18 +48,15 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
 
   const categories = categorizeByTags(sites);
 
-  useEffect(() => {
-    if (Object.keys(categories).length > 0 && activeTag === null) {
-      setActiveTag(Object.keys(categories)[0]);
-    }
-  }, [categories]);
+  // Set default tag on initial load
+  if (Object.keys(categories).length > 0 && !activeTag) {
+    setActiveTag(Object.keys(categories)[0]);
+  }
 
-  useEffect(() => {
-    if (activeTag && categories[activeTag]) {
-      const totalItems = categories[activeTag].length;
-      setTotalPages(Math.ceil(totalItems / itemsPerPage));
-    }
-  }, [activeTag, categories]);
+  if (activeTag && categories[activeTag]) {
+    const totalItems = categories[activeTag].length;
+    setTotalPages(Math.ceil(totalItems / itemsPerPage));
+  }
 
   const getCurrentPageData = () => {
     if (activeTag && categories[activeTag]) {
@@ -55,15 +68,18 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
 
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
+  // Dynamically setting page meta based on the active tag for better SEO
+  const currentTagName = activeTag ? `Category: ${activeTag}` : 'All Categories';
+
   return (
     <>
       <Head>
-        <title>Featured Website Navigation - Tags Categories</title>
-        <meta name="description" content="Browse featured website categories and discover content and resources that interest you." />
-        <meta name="keywords" content="website navigation, tag categories, website recommendations, browse categories" />
+        <title>{`${currentTagName} | Featured Website Navigation`}</title>
+        <meta name="description" content={`Browse websites categorized under ${activeTag || 'various topics'} and discover valuable resources.`} />
+        <meta name="keywords" content={`website navigation, ${activeTag}, site categories, tag-based browsing`} />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Featured Website Navigation - Tags Categories" />
-        <meta property="og:description" content="Browse featured website categories and discover content and resources that interest you." />
+        <meta property="og:title" content={`Featured Websites - ${currentTagName}`} />
+        <meta property="og:description" content={`Explore websites related to ${activeTag || 'various categories'}`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://aibookmarker-nav.vercel.app/" />
         <meta property="og:image" content="https://aibookmarker-nav.vercel.app/preview-image.jpg" />
@@ -92,7 +108,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
                   onClick={() => {
                     setActiveTag(tag);
                     setMenuOpen(false);
-                    if (activeTag !== tag) setCurrentPage(1);
+                    setCurrentPage(1);  // Reset page when category changes
                   }}
                   className={`text-lg block w-full text-left p-2 rounded-md ${
                     activeTag === tag
