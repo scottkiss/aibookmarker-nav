@@ -1,3 +1,5 @@
+"use client";
+
 // src/app/admin/page.tsx
 
 import AdminComponent from '@/components/adminComponent';
