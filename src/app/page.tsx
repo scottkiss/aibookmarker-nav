@@ -2,7 +2,6 @@
 
 import ClientComponent from '@/components/clientComponent';
 import { SiteProps } from '../components/SiteCard';
-import Head from 'next/head';
 
 
 export default async function Home() {
@@ -13,7 +12,7 @@ export default async function Home() {
 
   return(
   <>
-  <ClientComponent initialSites={initialSites} />;
+  <ClientComponent initialSites={initialSites} />
   </>
   )
 }
