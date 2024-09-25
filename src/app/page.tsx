@@ -3,7 +3,9 @@ import { SiteProps } from '../components/SiteCard';
 
 export default async function Home() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sites`, {
-    next: { tags: ['site'] },
+    next: {
+      revalidate: 60 // Revalidate every 60 seconds
+    },
   });
   const initialSites: SiteProps["site"][] = await response.json();
 
