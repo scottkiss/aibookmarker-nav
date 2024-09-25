@@ -1,4 +1,4 @@
-import ClientComponent from '@/components/clientComponent';
+import ServerSideComponent from '@/components/serverComponent';
 import { SiteProps } from '../components/SiteCard';
 
 export default async function Home() {
@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-      <ClientComponent initialSites={initialSites} />
+      <ServerSideComponent initialSites={initialSites} />
     </div>
   );
 }
