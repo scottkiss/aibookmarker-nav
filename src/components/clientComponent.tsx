@@ -1,6 +1,6 @@
 import { SiteProps } from "./SiteCard";
 
-export default function ClientComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
+export default function ServerComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
   const categorizeByTags = (sites: SiteProps["site"][]) => {
     const categories: { [tagName: string]: SiteProps["site"][] } = {};
     sites.forEach((site) => {
@@ -19,7 +19,7 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
 
   return (
     <div className="flex flex-col lg:flex-row">
-      <aside className="hidden lg:block lg:w-64 p-4 bg-gray-100 shadow-lg h-full overflow-y-auto">
+      <aside className="lg:w-64 p-4 bg-gray-100 shadow-lg fixed lg:relative h-full overflow-y-auto">
         <h2 className="font-bold mb-4">Categories</h2>
         <nav aria-label="Category navigation">
           <ul className="space-y-2">
@@ -38,38 +38,10 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
       </aside>
 
       <main className="flex-1 p-4 lg:ml-64 bg-gray-50">
-        {/* Mobile Sidebar (hidden by default) */}
-        <div className="block lg:hidden mb-4">
-          <button
-            className="p-2 bg-blue-500 text-white rounded-md w-full"
-            onClick={() => document.getElementById('mobile-sidebar')?.classList.toggle('hidden')}
-          >
-            Open Menu
-          </button>
-        </div>
-
-        <div id="mobile-sidebar" className="hidden lg:hidden fixed inset-0 bg-white z-10 p-4 shadow-lg overflow-y-auto">
-          <h2 className="font-bold mb-4">Categories</h2>
-          <nav aria-label="Category navigation">
-            <ul className="space-y-2">
-              {Object.keys(categories).map((tag) => (
-                <li key={tag}>
-                  <a
-                    href={`#${tag}`}
-                    className="text-lg block p-2 rounded-md text-gray-700 hover:bg-gray-200 transition-colors"
-                  >
-                    {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-
         {Object.keys(categories).map((tag) => (
           <section key={tag} id={tag} className="mb-8">
             <h1 className="text-3xl font-bold mb-4">{tag.charAt(0).toUpperCase() + tag.slice(1)}</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories[tag].map((site) => (
                 <div key={site.id} className="bg-white p-4 shadow rounded-lg transition-transform transform hover:scale-105">
                   <div className="flex items-center mb-2">
