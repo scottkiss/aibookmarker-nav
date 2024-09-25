@@ -1,4 +1,5 @@
 // src/app/api/sites/route.js
+export const dynamic = 'force-dynamic';
 
 import { getPublishedSites } from "@/lib/db";
 import { NextResponse } from "next/server";
