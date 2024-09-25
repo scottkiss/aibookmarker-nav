@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { SiteProps } from "./SiteCard";
 
 export default function ClientComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
   const categorizeByTags = (sites: SiteProps["site"][]) => {
     const categories: { [tagName: string]: SiteProps["site"][] } = {};
     sites.forEach((site) => {
@@ -19,7 +22,15 @@ export default function ClientComponent({ initialSites }: { initialSites: SitePr
 
   return (
     <div className="flex flex-col lg:flex-row">
-      <aside className="lg:w-64 p-4 bg-gray-100 shadow-lg fixed h-full overflow-y-auto">
+      {/* Toggle button for mobile */}
+      <button
+        className="lg:hidden p-2 bg-blue-500 text-white rounded-md m-4"
+        onClick={() => setSidebarOpen(!isSidebarOpen)}
+      >
+        {isSidebarOpen ? 'Close Menu' : 'Open Menu'}
+      </button>
+
+      <aside className={`lg:w-64 p-4 bg-gray-100 shadow-lg fixed h-full overflow-y-auto transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
         <h2 className="font-bold mb-4">Categories</h2>
         <nav aria-label="Category navigation">
           <ul className="space-y-2">
