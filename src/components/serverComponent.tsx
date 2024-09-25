@@ -41,7 +41,11 @@ export default function ServerSideComponent({ initialSites }: { initialSites: Si
               {categories[tag].map((site) => (
                 <div key={site.id} className="bg-white p-4 shadow rounded-lg transition-transform transform hover:scale-105">
                   <div className="flex items-center mb-2">
-                    <img src={site.favicon} alt={`${site.title} favicon`} className="w-8 h-8 mr-2" />
+                  <img
+                      src={site.favicon || '/logo.png'}
+                      alt={`${site.title} favicon`}
+                      className="w-8 h-8 mr-2"
+                    />
                     <h2 className="font-semibold">{site.title}</h2>
                   </div>
                   <p className="mt-2">{site.summarize}</p>
