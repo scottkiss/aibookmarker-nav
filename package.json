@@ -5,6 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run prisma-generate && prisma migrate deploy && next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "postinstall": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
     "start": "next start",
     "prisma-generate": "prisma generate"
   },
