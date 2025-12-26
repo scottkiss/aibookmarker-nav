@@ -1,11 +1,26 @@
 import { SiteProps } from "./SiteCard";
 
 export default function ServerSideComponent({ initialSites }: { initialSites: SiteProps["site"][] }) {
+  // Deduplicate initialSites based on id
+  const uniqueSites = Array.from(
+    new Map(initialSites.map((site) => [site.id, site])).values()
+  );
+
   const categorizeByTags = (sites: SiteProps["site"][]) => {
     const categories: { [tagName: string]: SiteProps["site"][] } = {};
     sites.forEach((site) => {
+      // Use a Set to track processed tags for this site to avoid duplicates within the same site
+      const processedTags = new Set<string>();
+
       site.tags.forEach((tag) => {
         const tagName = tag.name.toLowerCase();
+
+        // Skip if we've already processed this tag for this site
+        if (processedTags.has(tagName)) {
+          return;
+        }
+        processedTags.add(tagName);
+
         if (!categories[tagName]) {
           categories[tagName] = [];
         }
@@ -15,7 +30,7 @@ export default function ServerSideComponent({ initialSites }: { initialSites: Si
     return categories;
   };
 
-  const categories = categorizeByTags(initialSites);
+  const categories = categorizeByTags(uniqueSites);
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -41,7 +56,7 @@ export default function ServerSideComponent({ initialSites }: { initialSites: Si
               {categories[tag].map((site) => (
                 <div key={site.id} className="bg-white p-4 shadow rounded-lg transition-transform transform hover:scale-105">
                   <div className="flex items-center mb-2">
-                  <img
+                    <img
                       src={site.favicon || '/logo.png'}
                       alt={`${site.title} favicon`}
                       className="w-8 h-8 mr-2"
