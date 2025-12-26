@@ -8,25 +8,28 @@ export default function ServerSideComponent({ initialSites }: { initialSites: Si
 
   const categorizeByTags = (sites: SiteProps["site"][]) => {
     const categories: { [tagName: string]: SiteProps["site"][] } = {};
+    const assignedSiteIds = new Set<number>();
+
     sites.forEach((site) => {
-      // Use a Set to track processed tags for this site to avoid duplicates within the same site
-      const processedTags = new Set<string>();
-
-      site.tags.forEach((tag) => {
-        const tagName = tag.name.toLowerCase();
-
-        // Skip if we've already processed this tag for this site
-        if (processedTags.has(tagName)) {
-          return;
+      if (site.tags && site.tags.length > 0) {
+        // Pick the first tag as the primary category
+        const firstTag = site.tags[0].name.toLowerCase();
+        if (!categories[firstTag]) {
+          categories[firstTag] = [];
         }
-        processedTags.add(tagName);
-
-        if (!categories[tagName]) {
-          categories[tagName] = [];
+        categories[firstTag].push(site);
+        assignedSiteIds.add(site.id);
+      } else {
+        // No tags, put in 'Other' or skip? Let's put in 'Miscellaneous'
+        const fallback = 'Miscellaneous';
+        if (!categories[fallback]) {
+          categories[fallback] = [];
         }
-        categories[tagName].push(site);
-      });
+        categories[fallback].push(site);
+        assignedSiteIds.add(site.id);
+      }
     });
+
     return categories;
   };
 
