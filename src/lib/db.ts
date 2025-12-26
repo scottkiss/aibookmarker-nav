@@ -3,8 +3,8 @@
 import prisma from './prisma';
 
 
-export async function updateSitePublished(id:number,published:boolean) {
-  const  updatedSite = await prisma.site.update({
+export async function updateSitePublished(id: number, published: boolean) {
+  const updatedSite = await prisma.site.update({
     where: { id },
     data: { published },
   });
@@ -32,15 +32,16 @@ export async function getSitesQuery() {
 }
 
 
-export async function getPublishedSites() {
+export async function getPublishedSites(limit?: number) {
   const sites = await prisma.site.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
       tags: true,
     },
-    where:{
-      published:true
-    }
+    where: {
+      published: true
+    },
+    take: limit
   });
   return sites;
 }

@@ -6,7 +6,7 @@ import { getPublishedSites } from '@/lib/db';
 
 export async function GET() {
   try {
-    const sites = getPublishedSites();
+    const sites = getPublishedSites(100);
     const rssFeed = `
       <?xml version="1.0" encoding="UTF-8" ?>
       <rss version="2.0">
@@ -17,8 +17,8 @@ export async function GET() {
           <language>en</language>
           <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
           ${(await sites)
-            .map(
-              (site) => `
+        .map(
+          (site) => `
               <item>
                 <title>${site.title}</title>
                 <link>${site.url}</link>
@@ -26,8 +26,8 @@ export async function GET() {
                 <pubDate>${format(new Date(site.createdAt), 'EEE, dd MMM yyyy HH:mm:ss O')}</pubDate>
                 <guid>${site.url}</guid>
               </item>`
-            )
-            .join('')}
+        )
+        .join('')}
         </channel>
       </rss>
     `;
